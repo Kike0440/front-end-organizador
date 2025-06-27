@@ -1,0 +1,365 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.admin-management {
+  padding: 1rem 2rem;
+  background-color: $background-color;
+  min-height: calc(100vh - 80px);
+
+  &__title {
+    color: $color-primary;
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-weight: 700;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__search-filter {
+    display: flex;
+    gap: 1.5rem;
+    flex-grow: 1;
+    max-width: 70%;
+    
+    @media (max-width: 767px) {
+      flex-direction: column;
+      max-width: 100%;
+    }
+  }
+
+  &__search-box, &__filter-box {
+    display: flex;
+    align-items: center;
+    background-color: $background-color;
+    border-radius: 15px;
+    padding: 10px 15px;
+    gap: 10px;
+    @include inset-neumorphism($background-color, 3px, 6px, 12%);
+    flex-grow: 1;
+  }
+
+  &__search-input, &__filter-select {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 5px;
+    font-size: 1em;
+    color: $color-primary;
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  &__add-button {
+    background-color: $background-color;
+    color: $color-primary;
+    border: none;
+    padding: 14px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @include raised-neumorphism($background-color, 3px, 6px, 10%);
+    transition: all 0.3s ease;
+
+    &:hover {
+      @include inset-neumorphism($background-color, 3px, 6px, 10%);
+    }
+
+    &:active {
+      @include inset-neumorphism($background-color, 5px, 10px, 12%);
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  &__locals-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2.5rem;
+  }
+
+  &__no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: $color-tertiary;
+    font-size: 1.2em;
+    padding: 3rem 0;
+  }
+
+  &__local-card {
+    background-color: $background-color;
+    border-radius: 20px;
+    @include raised-neumorphism($background-color, 3px, 6px, 10%);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  &__local-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+  }
+
+  &__local-info {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-grow: 1;
+  }
+
+  &__local-name {
+    color: $color-primary;
+    font-size: 1.5em;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  &__local-address, &__local-price, &__local-size, &__local-description {
+    color: color.adjust($color-primary, $lightness: -10%);
+    font-size: 0.95em;
+  }
+
+  &__local-price {
+    font-weight: bold;
+    color: $color-secondary;
+  }
+
+  &__local-status {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-flex;
+    text-transform: capitalize;
+
+    &--available {
+      background-color: color.adjust($color-green, $lightness: 30%);
+      color: color.adjust($color-green, $lightness: -10%);
+    }
+    &--rented {
+      background-color: color.adjust($color-red, $lightness: 30%);
+      color: color.adjust($color-red, $lightness: -10%);
+    }
+    &--maintenance {
+      background-color: color.adjust($color-yellow, $lightness: 20%);
+      color: color.adjust($color-yellow, $lightness: -10%);
+    }
+  }
+
+  &__local-actions {
+    margin-top: 1rem;
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+  }
+
+  &__edit-button, &__delete-button {
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    @include raised-neumorphism($background-color, 3px, 6px, 10%);
+
+    &:hover {
+      @include raised-neumorphism($background-color, 5px, 10px, 10%);
+    }
+    &:active {
+      @include inset-neumorphism($background-color, 3px, 6px, 12%);
+    }
+  }
+
+  &__edit-button {
+    background-color: $color-secondary;
+    color: $color-primary;
+    &:hover { background-color: color.adjust($color-secondary, $lightness: 5%); }
+    &:active { background-color: color.adjust($color-secondary, $lightness: -5%); }
+  }
+
+  &__delete-button {
+    background-color: $color-red;
+    color: white;
+    &:hover { background-color: color.adjust($color-red, $lightness: -5%); }
+    &:active { background-color: color.adjust($color-red, $lightness: -10%); }
+  }
+
+  // --- Modal Styles ---
+  &__modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $background-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  &__modal {
+    background-color: $background-color;
+    padding: 2.5rem;
+    border-radius: 25px;
+    @include raised-neumorphism($background-color, 7px, 14px, 12%);
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: fadeInScale 0.3s ease-out;
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &__modal-title {
+    color: $color-primary;
+    font-size: 2em;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  &__form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @media (min-width: 600px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__form-group {
+    display: flex;
+    flex-direction: column;
+
+    &:last-of-type {
+      @media (min-width: 600px) {
+        grid-column: span 2;
+      }
+    }
+  }
+
+  &__form-group label {
+    color: color.adjust($color-primary, $lightness: -10%);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  &__form-input, &__form-select, &__form-textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: $background-color;
+    color: $color-primary;
+    outline: none;
+    @include inset-neumorphism($background-color, 5px, 10px, 12%);
+    transition: all 0.2s ease;
+
+    &:focus {
+      @include inset-neumorphism($background-color, 7px, 14px, 12%);
+    }
+  }
+
+  &__form-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  &__modal-actions {
+    grid-column: span 2;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+
+    @media (max-width: 599px) {
+      flex-direction: column;
+    }
+  }
+
+  &__modal-save, &__modal-cancel {
+    border: none;
+    padding: 0.9rem 1.8rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: all 0.2s ease;
+    @include raised-neumorphism($background-color, 5px, 10px, 10%);
+
+    &:hover {
+      @include raised-neumorphism($background-color, 7px, 14px, 10%);
+    }
+    &:active {
+      @include inset-neumorphism($background-color, 5px, 10px, 12%);
+    }
+
+    @media (max-width: 599px) {
+      width: 100%;
+    }
+  }
+
+  &__modal-save {
+    background-color: $color-primary;
+    color: white;
+    &:hover { background-color: color.adjust($color-primary, $lightness: -5%); }
+    &:active { background-color: color.adjust($color-primary, $lightness: -10%); }
+  }
+
+  &__modal-cancel {
+    background-color: $color-tertiary; // Big River
+    color: white;
+    &:hover { background-color: color.adjust($color-tertiary, $lightness: -5%); }
+    &:active { background-color: color.adjust($color-tertiary, $lightness: -10%); }
+  }
+}

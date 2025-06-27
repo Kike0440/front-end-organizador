@@ -1,0 +1,151 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.admin-dashboard {
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: $background-color;
+  border-radius: 8px;
+
+  &__title {
+    color: $color-primary;
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 700;
+  }
+
+  &__section {
+    margin-bottom: 3.5rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+
+  &__section-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: $color-primary;
+    margin-bottom: .5rem;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+
+  &__cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .dashboard-card {
+    background-color: $background-color;
+    border: none;
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+    text-align: left;
+    @include raised-neumorphism($background-color, 3px, 6px, 12%);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      @include raised-neumorphism($background-color, 1px, 10px, 30%);
+    }
+
+    svg {
+      color: $color-primary;
+    }
+
+    &__title {
+      font-size: 1rem;
+      color: #777;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &__value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #333;
+      margin: 0;
+    }
+
+    &__note { // Estilo para notas de placeholder
+        font-size: 0.8rem;
+        color: #999;
+        font-style: italic;
+        margin-top: 0.5rem;
+    }
+
+    &--available {
+      svg { color: $color-green; }
+      .dashboard-card__value { color: $color-green; }
+    }
+    &--rented {
+      svg { color: $color-orange; }
+      .dashboard-card__value { color: $color-orange; }
+    }
+    &--maintenance {
+      svg { color: $color-yellow; }
+      .dashboard-card__value { color: $color-yellow; }
+    }
+    &--active {
+      svg { color: $color-blue; }
+      .dashboard-card__value { color: $color-blue; }
+    }
+    &--ending-soon {
+      svg { color: $color-red; }
+      .dashboard-card__value { color: $color-red; }
+    }
+    &--pending {
+      svg { color: $color-dark-blue; }
+      .dashboard-card__value { color: $color-dark-blue; }
+    }
+    &--employee {
+      svg { color: $color-blue; }
+      .dashboard-card__value { color: $color-blue; }
+    }
+    &--admin {
+      svg { color: $color-pink; }
+      .dashboard-card__value { color: $color-pink; }
+    }
+    &--revenue {
+        background-color: $background-color;
+        border-color: none;
+        svg { color: $color-green; }
+        .dashboard-card__value { color: $color-green; }
+    }
+    &--expenses {
+      svg { color: $color-orange; }
+      .dashboard-card__value { color: $color-orange; }
+    }
+
+  }
+
+  &__chart-section {
+    margin-top: 3.5rem;
+    padding: 2rem;
+    // Elimina el border dashed y background-color #fbfbfb si los tenías
+    border: none; // Borde sólido para la caja de la gráfica
+    border-radius: 20px;
+    background-color: $background-color; // Fondo blanco
+    text-align: center;
+    @include raised-neumorphism($background-color, 3px, 6px, 12%);
+  }
+
+  h4 {
+    color: $color-primary;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+  }
+}

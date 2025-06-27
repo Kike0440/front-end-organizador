@@ -1,0 +1,40 @@
+@use "sass:color";
+
+$color-primary: #4E635E; // Ocean deep
+$color-secondary: #A6B49E; // siren song
+$color-tertiary: #818C78; // Big river
+$color-red: #A64D56; // Red devil
+$color-blue: #4a6079; // Blue whale
+$color-dark-blue: #344a60; // Dark blue
+$color-yellow: #c6af55; // Light yellow
+$color-green: #587647; // Green mist
+$color-orange: #c5813c; // Light orange
+$color-purple: #7A6A8E; // Purple haze
+$color-pink: #D6A2B8; // Pink blush
+
+// Color de fondo
+$background-color: #E2E0C8; // Villa nova
+
+// mixin para neumorfismo hundido
+@mixin inset-neumorphism(
+    $base-color,
+    $offset: 3px,
+    $blur: 6px,
+    $intensity: 12%
+) {
+    box-shadow:
+        inset $offset $offset $blur color.adjust($base-color, $lightness: -$intensity),
+        inset (-$offset) (-$offset) $blur color.adjust($base-color, $lightness: $intensity);
+}
+
+// mixin para neumorfismo elevado
+@mixin raised-neumorphism(
+    $base-color,
+    $offset: 3px,
+    $blur: 6px,
+    $intensity: 12%
+) {
+    box-shadow:
+        $offset $offset $blur color.adjust($base-color, $lightness: -$intensity),
+        (-$offset) (-$offset) $blur color.adjust($base-color, $lightness: $intensity);
+}

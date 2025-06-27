@@ -1,0 +1,247 @@
+@use '../../../styles/variables' as *;
+@use 'sass:color';
+
+.employee-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $background-color,;
+
+  &__container {
+    height: auto;
+    background-color: $background-color;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+  }
+
+  &__nav {
+    background-color: $background-color; // Siren Song
+    color: $color-primary;
+    padding: 1rem 2rem;
+    margin: 7px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    @include inset-neumorphism($background-color, 3px, 6px, 12%);
+    //position: relative;
+
+    .employee-layout__nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: $color-primary; // Color primario
+      z-index: 2;
+    }
+
+    .employee-layout__menu-toggle {
+      background: $background-color;
+      color: $color-primary;
+      border: none;
+      padding: 5px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      @include raised-neumorphism($background-color, 3px, 6px, 10%);
+
+      justify-content: center;
+      z-index: 2; // Para que esté encima del menú
+      
+      &:hover {
+        background-color: $background-color;
+        @include inset-neumorphism($background-color, 4px, 8px, 12%);
+        transition: all 0.3s ease;
+      }
+    }
+
+    .employee-layout__nav-links {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex !important;
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: $background-color;
+      @include raised-neumorphism($background-color, 3px, 6px, 10%);
+      transform: translateY(-100%);
+      border-radius: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+      z-index: 1;
+
+      &--open {
+        transform: translateY(0); // Muestra el menú
+        opacity: 1;
+        pointer-events: auto; // Permite interacción
+      }
+
+      li {
+        width: 100%;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); // Separador
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .employee-layout__nav-link {
+          color: $color-primary;
+          text-decoration: none;
+          padding: 1rem 1.5rem;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          transition: background-color 0.2s ease;
+          width: 100%;
+          border-radius: 20px;
+          font-size: 1.2em;
+
+          &:hover {
+            background-color: $background-color;
+            @include inset-neumorphism($background-color, 4px, 8px, 12%);
+            transform: translateY(-2px);
+          }
+
+          &--active {
+            background-color: $background-color;
+            @include inset-neumorphism($background-color, 4px, 8px, 12%);
+          }
+        }
+      }
+    }
+
+    .employee-layout__logout-mobile-item {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1); // Separador
+      box-sizing: border-box;
+    }
+
+    .employee-layout__logout-mobile-button {
+      color: $color-primary;
+      background-color: $background-color;
+      border: none;
+      text-decoration: none;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background-color 0.2s ease;
+      width: 100%;
+      border-radius: 20px;
+      font-size: 1.2em;
+
+      &:hover {
+        background-color: $background-color;
+        @include inset-neumorphism($background-color, 4px, 8px, 12%);
+        transition: all 0.3s ease;
+      }
+    }
+
+    .employee-layout__logout-button {
+      background-color: $background-color;
+      color: $color-primary;
+      border: none;
+      padding: 0.5rem .5rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      @include raised-neumorphism($background-color, 3px, 6px, 12%);
+      transition: all 0.3s ease;
+      display: none;
+
+      &--desktop {
+        display: none;
+      }
+
+      &:hover {
+        background-color: $background-color;
+        @include inset-neumorphism($background-color, 4px, 8px, 12%);
+        transition: all 0.3s ease;
+      }
+
+      &:active {
+        background-color: color.adjust($background-color, $lightness: -10%);
+        @include inset-neumorphism($background-color, 2px, 4px, 15%);
+      }
+    }
+  }
+
+  @media (min-width: 769px) {
+
+    .employee-layout__menu-toggle {
+      display: none;
+    }
+
+    .employee-layout__nav-links {
+      position: static;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+      background-color: transparent;
+      box-shadow: none;
+      width: auto;
+      gap: 1rem;
+
+      li {
+        border-bottom: none;
+        &:last-child {
+          border-bottom: none;
+        }
+
+        .employee-layout__nav-link {
+          padding: 0.5rem 1rem;
+          white-space: nowrap;
+          border-radius: 10px;
+
+          &--active {
+            background-color: transparent;
+          }
+        }
+      }
+    }
+
+    .employee-layout__logout-mobile-item {
+      display: none;
+    }
+
+    .employee-layout__logout-button {
+      display: flex;
+      &--desktop {
+        display: flex;
+      }
+    }
+  }
+
+  &__content {
+    flex-grow: 1;
+    padding-top: calc(5rem + 1rem + 8px);
+  }
+
+  &__footer {
+    background-color: $background-color;
+    color: $color-primary;
+    text-align: center;
+    padding: 1rem;
+    font-size: 1em;
+    margin: 10px;
+    border-radius: 20px;
+    @include inset-neumorphism($background-color, 3px, 6px);
+  }
+}

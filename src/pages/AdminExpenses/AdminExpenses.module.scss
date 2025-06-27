@@ -1,0 +1,198 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.admin-expenses {
+  padding: 1rem 2rem;
+  background-color: $background-color;
+  min-height: calc(100vh - 80px);
+
+  &__title {
+    color: $color-primary;
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-weight: 700;
+  }
+
+  &__controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  &__search,
+  &__filter {
+    display: flex;
+    gap: 1.5rem;
+    flex-grow: 1;
+    max-width: 70%;
+    padding: 10px 15px;
+    border-radius: 15px;
+    @include inset-neumorphism($background-color, 3px, 6px, 12%);
+
+    @media (max-width: 767px) {
+      flex-direction: column;
+      max-width: 100%;
+    }
+  }
+
+  &__search-input,
+  &__filter-select {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 5px;
+    font-size: 1em;
+    color: $color-primary;
+    flex-grow: 1;
+    width: 100%;
+  }
+
+  &__add-button {
+    background-color: $background-color;
+    color: $color-primary;
+    border: none;
+    padding: 14px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    @include raised-neumorphism($background-color, 3px, 6px, 10%);
+    transition: all 0.3s ease;
+
+    &:hover {
+      border: none!important;
+      @include inset-neumorphism($background-color, 3px, 6px, 10%);
+    }
+
+    &:active {
+      @include inset-neumorphism($background-color, 5px, 10px, 12%);
+    }
+
+    @media (max-width: 767px) {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  &__table-container {
+    overflow-x: auto;
+    border-radius: 20px;
+    @include raised-neumorphism($background-color, 3px, 6px, 12%);
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+
+    th,
+    td {
+      padding: 12px 15px;
+      text-align: left;
+    }
+
+    th {
+      background-color: $background-color;
+      color: $color-primary;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+    }
+
+    tbody tr:hover {
+      background-color: $background-color;
+      @include inset-neumorphism($background-color, 3px, 6px, 12%);
+    }
+  }
+
+  &__category-badge {
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    white-space: nowrap;
+    display: inline-block;
+
+    // Colores para las categorías de gastos
+    &--maintenance {
+        background-color: color.adjust($color-orange, $lightness: 20%);
+        color: color.adjust($color-orange, $lightness: -20%);
+    }
+    &--utility {
+        background-color: color.adjust($color-blue, $lightness: 20%);
+        color: color.adjust($color-blue, $lightness: -20%);
+    }
+    &--administrative {
+        background-color: color.adjust($color-dark-blue, $lightness: 20%);
+        color: color.adjust($color-dark-blue, $lightness: -20%);
+    }
+    &--salary {
+        background-color: color.adjust($color-pink, $lightness: 0%);
+        color: color.adjust($color-pink, $lightness: -40%);
+    }
+    &--marketing {
+        background-color: color.adjust($color-purple, $lightness: 20%);
+        color: color.adjust($color-purple, $lightness: -20%);
+    }
+    &--other {
+        background-color: color.adjust($color-secondary, $lightness: 20%);
+        color: color.adjust($color-secondary, $lightness: -20%);
+    }
+  }
+
+  &__actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  &__action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.2s ease;
+
+    &--edit {
+      color: $color-blue;
+      &:hover {
+        background-color: $background-color;
+        @include inset-neumorphism($background-color, 3px, 6px, 10%);
+      }
+    }
+
+    &--delete {
+      color: $color-red;
+      &:hover {
+        background-color: $background-color;
+        @include inset-neumorphism($background-color, 3px, 6px, 10%);
+      }
+    }
+  }
+
+  &__no-results {
+    text-align: center;
+    padding: 2rem;
+    color: $color-primary;
+    font-style: italic;
+  }
+}

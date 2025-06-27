@@ -1,0 +1,137 @@
+@use '../../styles/variables' as *;
+@use 'sass:color';
+
+.contact-admin-page {
+  padding: .2rem 2rem;
+  background-color: $background-color;
+  min-height: calc(90vh - 97px);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    font-weight: 600;
+  }
+
+  &__back-button {
+    background-color: $background-color;
+    color: $color-primary;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include raised-neumorphism($background-color, 3px, 6px, 12%);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: $background-color;
+      @include inset-neumorphism($background-color, 5px, 10px, 12%);
+    }
+    &:active {
+      background-color: color.adjust($background-color, $lightness: -10%);
+      @include inset-neumorphism($background-color, 5px, 10px, 12%);
+    }
+  }
+
+  &__title {
+    color: $color-secondary;
+    font-size: 2em;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    @media (max-width: 767px) {
+      font-size: 1.8em;
+      text-align: center;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  &__card {
+    background-color: $background-color;
+    border-radius: 25px;
+    @include raised-neumorphism($background-color, 12px, 24px, 10%);
+    display: flex;
+    flex-direction: column;
+    padding: 2.5rem;
+
+    @media (min-width: 768px) {
+      //flex-direction: row;
+      gap: 3rem;
+    }
+  }
+
+  &__local-info {
+    background-color: color.adjust($background-color, $lightness: -2%);
+    border-left: 4px solid color.adjust($color-secondary, $lightness: -10%);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 10px;
+    color: $color-primary;
+    @include inset-neumorphism($background-color, 3px, 6px, 12%);
+  }
+
+  &__form-group {
+    margin-bottom: 1.5rem;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: $color-primary;
+  }
+
+  &__textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: $background-color;
+    color: $color-primary;
+    outline: none;
+    @include inset-neumorphism($background-color, 5px, 10px, 12%);
+    transition: all 0.2s ease;
+
+    &:focus {
+      @include inset-neumorphism($background-color, 7px, 14px, 12%);
+    }
+  }
+
+  &__textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  &__submit-button {
+    background-color: $background-color;
+    color: $color-primary;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    @include raised-neumorphism($background-color, 3px, 6px, 12%);
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: color.adjust($background-color, $lightness: 0%);
+      @include inset-neumorphism($background-color, 5px, 10px, 5%);
+    }
+    &:active {
+      background-color: color.adjust($background-color, $lightness: 0%);
+      @include inset-neumorphism($background-color, 5px, 10px, 10%);
+    }
+  }
+}
